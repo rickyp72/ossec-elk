@@ -5,4 +5,4 @@ metadata
 
 cookbook 'java'
 cookbook 'apt'
-
+cookbook 'logstash'

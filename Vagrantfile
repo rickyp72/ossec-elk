@@ -18,9 +18,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   #   $ vagrant plugin install vagrant-omnibus
   #
-  if Vagrant.has_plugin?("vagrant-omnibus")
-    config.omnibus.chef_version = 'latest'
-  end
+  # if Vagrant.has_plugin?("vagrant-omnibus")
+  #   config.omnibus.chef_version = 'latest'
+  # end
 
   # Every Vagrant virtual environment requires a box to build off of.
   # If this value is a shorthand to a box in Vagrant Cloud then
@@ -85,7 +85,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     chef.run_list = [
       'recipe[ossec-elk::default]',
-      'recipe[java::oracle]'
+      'recipe[java::oracle]',
+      'recipe[logstash::server]'
     ]
   end
 end
