@@ -85,8 +85,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     chef.run_list = [
       'recipe[ossec-elk::default]',
-      'recipe[java::oracle]',
-      'recipe[logstash::server]'
+      'recipe[java::oracle]'
     ]
   end
 end
