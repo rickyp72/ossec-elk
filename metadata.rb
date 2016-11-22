@@ -13,6 +13,7 @@ version '0.1.0'
 # gets a `View Source` link
 # source_url 'https://github.com/<insert_org_here>/ossec-elk' if respond_to?(:source_url)
 depends 'elasticsearch', '>= 3.0.1'
+depends 'logstash', '>= 0.12.0'
 depends 'apt'
 depends 'yum'
 depends 'curl'
