@@ -22,6 +22,7 @@ elasticsearch_service 'elasticsearch' do
 end
 
 
+
 # elasticsearch_plugin 'head' do
 #   url 'mobz/elasticsearch-head'
 #   action :install
