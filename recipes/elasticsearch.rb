@@ -4,7 +4,7 @@ elasticsearch_user 'elasticsearch'
 
 elasticsearch_install 'elasticsearch' do
   type :package.to_s
-  version "5.0.1"
+  version "2.3.4"
   action :install
 end
 
