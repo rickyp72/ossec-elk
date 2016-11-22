@@ -23,8 +23,8 @@ end
 
 
 
-# elasticsearch_plugin 'head' do
-#   url 'mobz/elasticsearch-head'
-#   action :install
-#   notifies :restart, 'elasticsearch_service[elasticsearch]', :delayed
-# end
+elasticsearch_plugin 'x-pack' do
+  url 'x-pack'
+  action :install
+  notifies :restart, 'elasticsearch_service[elasticsearch]', :delayed
+end
