@@ -1,8 +1,14 @@
 ### logstash config
 
+execute 'apt-get-update-logstash' do
+  command 'apt-get update'
+  action :nothing
+end
+
 execute 'repo_key' do
   command 'wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -'
   action :nothing
+  notifies :run, "execute[apt-get-update-logstash]"
 end
 
 cookbook_file '/etc/apt/sources.list.d/logstash.list' do
@@ -11,6 +17,10 @@ cookbook_file '/etc/apt/sources.list.d/logstash.list' do
   group 'root'
   mode 00644
   notifies :run, "execute[repo_key]"
+end
+
+apt_package 'logstash' do
+  action :install
 end
 
 service 'logstash' do
