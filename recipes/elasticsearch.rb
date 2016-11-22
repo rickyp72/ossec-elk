@@ -10,14 +10,14 @@ elasticsearch_install 'elasticsearch' do
   action :install
 end
 
-elasticsearch_configure 'elasticsearch' do
-  allocated_memory '256m'
-  configuration ({
-  'cluster.name' => 'rnb_es',
-  'node.name' => 'rnb-ossec',
-  'network.host' => '_site_'
-})
-end
+# elasticsearch_configure 'elasticsearch' do
+#   allocated_memory '256m'
+#   configuration ({
+#   'cluster.name' => 'rnb_es',
+#   'node.name' => 'rnb-ossec',
+#   'network.host' => '_site_'
+# })
+# end
 
 elasticsearch_service 'elasticsearch' do
   service_actions [:enable, :start]
