@@ -3,7 +3,7 @@
 execute 'apt-get-update-logstash' do
   command 'apt-get update'
   action :nothing
-  notifies :install, "apt_package[logstash]"
+  notifies :install, "apt_package[logstash]", :delayed
 end
 
 execute 'repo_key' do
