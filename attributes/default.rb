@@ -8,6 +8,5 @@ override['java']['oracle']['accept_oracle_download_terms'] = true
 
 
 
-# override['logstash']['source']['repo'] = 'https://github.com/elastic/logstash.git'
-# # override['logstash']['source']['sha'] = nil
-# override['logstash']['source']['java_home'] = '/usr/lib/jvm/java-8-oracle-amd64' # oracle 8 on ubuntu
+override['elasticsearch']['install']['version'] = '5.0.1'
+override['elasticsearch']['checksums']['5.0.1']['debian'] = 'aedbddacbf5c87806ba22d5a953abbef8f54dc0d'
