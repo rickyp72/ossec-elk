@@ -3,6 +3,7 @@
 execute 'apt-get-update-logstash' do
   command 'apt-get update'
   action :nothing
+  notifies :install, "apt_package[logstash]"
 end
 
 execute 'repo_key' do
@@ -20,8 +21,9 @@ cookbook_file '/etc/apt/sources.list.d/logstash.list' do
 end
 
 apt_package 'logstash' do
-  action :install
+  action :nothing
 end
+
 
 service 'logstash' do
   supports :status => true
