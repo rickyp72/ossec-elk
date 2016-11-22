@@ -5,6 +5,8 @@ elasticsearch_user 'elasticsearch'
 elasticsearch_install 'elasticsearch' do
   type :package.to_s
   version "2.3.4"
+  download_url "https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.4/elasticsearch-2.3.4.deb"
+  download_checksum "abf6ce899cb7f2d9fc6eae0ecba148a191093e62afd1e242ba0bb1a7c2686074" # sha256 checksum
   action :install
 end
 
