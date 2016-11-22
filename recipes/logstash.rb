@@ -22,12 +22,14 @@ end
 
 apt_package 'logstash' do
   action :nothing
+  ignore_failure true
 end
 
 
 service 'logstash' do
   supports :status => true
   action [ :enable, :start ]
+  ignore_failure true
 end
 
 cookbook_file '/etc/logstash/conf.d/01-ossec-singlehost.conf' do
