@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # any other machines on the same network, but cannot be accessed (through this
   # network interface) by any external networks.
   config.vm.network :private_network, ip: '192.168.33.20'
-  config.vm.network :port_forwared, guest: 9200, host: 9200
+  config.vm.network :forwarded_port, guest: 9300, host: 9300
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,

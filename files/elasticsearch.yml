@@ -1,0 +1,13 @@
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# THIS FILE IS MANAGED BY CHEF, DO NOT EDIT MANUALLY, YOUR CHANGES WILL BE OVERWRITTEN!
+#
+# Please see the documentation for further information on configuration options:
+# <http://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration.html>
+#
+---
+cluster.name: elasticsearch
+node.name: ossec-elk-berkshelf
+path.conf: "/etc/elasticsearch"
+path.data: "/var/lib/elasticsearch"
+path.logs: "/var/log/elasticsearch"
+

@@ -1,0 +1,21 @@
+################################
+# THIS FILE IS MANAGED BY CHEF
+################################
+# Elasticsearch
+################################
+#  CHANGES MAY BE OVERWRITTEN
+################################
+
+CONF_DIR=/etc/elasticsearch
+DATA_DIR=/var/lib/elasticsearch
+ES_GROUP=elasticsearch
+ES_HOME=/usr/share/elasticsearch
+ES_JVM_OPTIONS=/etc/elasticsearch/jvm.options
+ES_STARTUP_SLEEP_TIME=5
+ES_USER=elasticsearch
+LOG_DIR=/var/log/elasticsearch
+MAX_LOCKED_MEMORY=unlimited
+MAX_MAP_COUNT=262144
+MAX_OPEN_FILES=65536
+PID_DIR=/var/run/elasticsearch
+RESTART_ON_UPGRADE=false
