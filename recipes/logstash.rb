@@ -6,26 +6,19 @@ execute 'apt-get-update-logstash' do
   notifies :install, "apt_package[logstash]", :delayed
 end
 
-elastic_repo = Chef::Config[:file_cache_path] + '/GPG-KEY-elasticsearch'
-
-remote_file elastic_repo do
+remote_file '/root/GPG-KEY-elasticsearch' do
   source 'https://packages.elasticsearch.org/GPG-KEY-elasticsearch'
   owner 'root'
   group 'root'
   checksum '10e406ba504706f44fbfa57a8daba5cec2678b31c1722e262ebecb5102d07659'
+  notifies :run, "execute[add_key]"
 end
 
 execute 'add_key' do
-  command 'apt-key add GPG-KEY-elasticsearch'
-  action :run
+  command 'apt-key add /root/GPG-KEY-elasticsearch'
+  action :nothing
   notifies :run, "execute[apt-get-update-logstash]"
 end
-
-# execute 'repo_key' do
-#   command 'wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -'
-#   action :nothing
-#   notifies :run, "execute[apt-get-update-logstash]"
-# end
 
 cookbook_file '/etc/apt/sources.list.d/logstash.list' do
   source 'logstash.list'
@@ -59,9 +52,10 @@ end
 
 # TODO: add template to ?
 
-geolitecity_dat = Chef::Config[:file_cache_path] + '/GeoLiteCity.dat.gz'
-
-remote_file geolitecity_dat do
+# geolitecity_dat = Chef::Config[:file_cache_path] + '/GeoLiteCity.dat.gz'
+#
+# remote_file geolitecity_dat do
+remote_file '/root/GeoLiteCity.dat.gz' do
   source 'http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz'
   owner 'root'
   group 'root'
@@ -69,15 +63,18 @@ remote_file geolitecity_dat do
 end
 
 execute 'extract_GeoLiteCity_dat' do
-  command 'gzip -d GeoLiteCity.dat.gz && mv GeoLiteCity.dat /etc/logstash/'
+  command 'gzip -d /root/GeoLiteCity.dat.gz && mv /root/GeoLiteCity.dat /etc/logstash/'
   action :run
 end
 
-group ossec do
-  action :modify
-  members "logstash"
-  append true
-end
+#  TODO: fix this failure
+# group ossec do
+#   action :modify
+#   members "logstash"
+#   append true
+#   ignore_failure true
+# end
+
 
 service 'logstash' do
   supports :status => true

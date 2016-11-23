@@ -1,9 +1,10 @@
 # TODO:
 #
 
-kibana_5 = Chef::Config[:file_cache_path] + '/kibana-5.0.1-amd64.deb'
-
-remote_file kibana_5 do
+# kibana_5 = Chef::Config[:file_cache_path] + '/kibana-5.0.1-amd64.deb'
+#
+# remote_file kibana_5 do
+remote_file '/root/kibana-5.0.1-amd64.deb' do
   source 'https://artifacts.elastic.co/downloads/kibana/kibana-5.0.1-amd64.deb'
   owner 'root'
   group 'root'
@@ -11,7 +12,7 @@ remote_file kibana_5 do
   checksum 'f66f88bbde9b7bb42d248cc4104e9db0649e6fadd60c2b4114515151e8c1305f'
 end
 
-dpkg_package 'kibana-5.0.1-amd64.deb' do
+dpkg_package '/root/kibana-5.0.1-amd64.deb' do
   action :install
 end
 
