@@ -41,12 +41,6 @@ apt_package 'logstash' do
 end
 
 
-service 'logstash' do
-  supports :status => true
-  action [ :enable, :start ]
-  ignore_failure true
-end
-
 cookbook_file '/etc/logstash/conf.d/01-ossec-singlehost.conf' do
   source '01-ossec-singlehost.conf'
   owner 'root'
@@ -62,6 +56,8 @@ cookbook_file '/etc/logstash/elastic-ossec-template.json' do
   mode 00644
   notifies :restart, "service[logstash]"
 end
+
+# TODO: add template to ?
 
 geolitecity_dat = Chef::Config[:file_cache_path] + '/GeoLiteCity.dat.gz'
 
@@ -83,6 +79,11 @@ group ossec do
   append true
 end
 
+service 'logstash' do
+  supports :status => true
+  action [ :enable, :start ]
+  ignore_failure true
+end
 
 # TODO:
 # In single-host deployments, you also need to grant the logstash user access to OSSEC alerts file:
