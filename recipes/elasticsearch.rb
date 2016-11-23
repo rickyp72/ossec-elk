@@ -23,8 +23,12 @@ end
 
 
 
-elasticsearch_plugin 'x-pack' do
-  url 'x-pack'
-  action :install
-  notifies :restart, 'elasticsearch_service[elasticsearch]', :delayed
-end
+# elasticsearch_plugin 'x-pack' do
+#   url 'x-pack'
+#   action :install
+#   notifies :restart, 'elasticsearch_service[elasticsearch]', :delayed
+# end
+
+# TODO:
+#  add template
+# $~/wazuh/extensions/elasticsearch# curl -XPUT "http://192.168.33.20:9200/_template/ossec/" -d "@elastic-ossec-template.json"
