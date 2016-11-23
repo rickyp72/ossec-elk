@@ -1,7 +1,7 @@
 # TODO:
-# $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
-# $ echo "deb http://packages.elastic.co/kibana/4.5/debian stable main" | sudo tee -a /etc/apt/sources.list
-# $ sudo apt-get update && sudo apt-get install kibana
+#
+
+# https://artifacts.elastic.co/downloads/kibana/kibana-5.0.1-amd64.deb
 
 # /opt/kibana/bin/kibana and add the following line
 #

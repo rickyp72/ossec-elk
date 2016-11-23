@@ -47,3 +47,7 @@ cookbook_file '/etc/logstash/elastic-ossec-template.json' do
   mode 00644
   notifies :restart, "service[logstash]"
 end
+
+
+# In single-host deployments, you also need to grant the logstash user access to OSSEC alerts file:
+# sudo usermod -a -G ossec logstash
