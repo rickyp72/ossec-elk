@@ -1,6 +1,33 @@
 # TODO:
 #
 
+kibana_5 = Chef::Config[:file_cache_path] + '/kibana-5.0.1-amd64.deb'
+
+remote_file kibana_5 do
+  source 'https://artifacts.elastic.co/downloads/kibana/kibana-5.0.1-amd64.deb'
+  owner 'root'
+  group 'root'
+  mode "0755"
+  checksum 'f66f88bbde9b7bb42d248cc4104e9db0649e6fadd60c2b4114515151e8c1305f'
+end
+
+dpkg_package 'kibana-5.0.1-amd64.deb' do
+  action :install
+end
+
+cookbook_file '/etc/kibana/kibana.yml' do
+  source 'kibana.yml'
+  owner 'root'
+  group 'root'
+  mode 00664
+  notifies :restart, 'service[kibana]', :delayed
+end
+
+service 'kibana' do
+  supports :status => true
+  action [ :enable, :start ]
+end
+
 # https://artifacts.elastic.co/downloads/kibana/kibana-5.0.1-amd64.deb
 
 # /opt/kibana/bin/kibana and add the following line

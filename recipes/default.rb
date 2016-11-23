@@ -9,6 +9,7 @@ include_recipe 'java::oracle'
 include_recipe 'ossec-elk::wazuh_ossec'
 include_recipe 'ossec-elk::logstash'
 include_recipe 'ossec-elk::elasticsearch'
+include_recipe 'ossec-elk::kibana'
 
 
 # sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"

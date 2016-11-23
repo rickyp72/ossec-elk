@@ -6,18 +6,33 @@ execute 'apt-get-update-logstash' do
   notifies :install, "apt_package[logstash]", :delayed
 end
 
-execute 'repo_key' do
-  command 'wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -'
-  action :nothing
+elastic_repo = Chef::Config[:file_cache_path] + '/GPG-KEY-elasticsearch'
+
+remote_file elastic_repo do
+  source 'https://packages.elasticsearch.org/GPG-KEY-elasticsearch'
+  owner 'root'
+  group 'root'
+  checksum 'abc123'
+end
+
+execute 'add_key' do
+  command 'apt-key add GPG-KEY-elasticsearch'
+  action :run
   notifies :run, "execute[apt-get-update-logstash]"
 end
+
+# execute 'repo_key' do
+#   command 'wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -'
+#   action :nothing
+#   notifies :run, "execute[apt-get-update-logstash]"
+# end
 
 cookbook_file '/etc/apt/sources.list.d/logstash.list' do
   source 'logstash.list'
   owner 'root'
   group 'root'
   mode 00644
-  notifies :run, "execute[repo_key]"
+  # notifies :run, "execute[repo_key]"
 end
 
 apt_package 'logstash' do
@@ -48,6 +63,21 @@ cookbook_file '/etc/logstash/elastic-ossec-template.json' do
   notifies :restart, "service[logstash]"
 end
 
+geolitecity_dat = Chef::Config[:file_cache_path] + '/GeoLiteCity.dat.gz'
 
+remote_file geolitecity_dat do
+  source 'http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz'
+  owner 'root'
+  group 'root'
+  checksum '561ff6d6ac149e5556d95a2733e47d53035b68e68f235050d0a6354ee98b48a0'
+end
+
+
+
+# TODO:
 # In single-host deployments, you also need to grant the logstash user access to OSSEC alerts file:
 # sudo usermod -a -G ossec logstash
+
+# install geoip stuff ??
+# $ sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
+# $ sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
