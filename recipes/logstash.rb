@@ -12,7 +12,7 @@ remote_file elastic_repo do
   source 'https://packages.elasticsearch.org/GPG-KEY-elasticsearch'
   owner 'root'
   group 'root'
-  checksum 'abc123'
+  checksum '10e406ba504706f44fbfa57a8daba5cec2678b31c1722e262ebecb5102d07659'
 end
 
 execute 'add_key' do
@@ -72,6 +72,16 @@ remote_file geolitecity_dat do
   checksum '561ff6d6ac149e5556d95a2733e47d53035b68e68f235050d0a6354ee98b48a0'
 end
 
+execute 'extract_GeoLiteCity_dat' do
+  command 'gzip -d GeoLiteCity.dat.gz && mv GeoLiteCity.dat /etc/logstash/'
+  action :run
+end
+
+group ossec do
+  action :modify
+  members "logstash"
+  append true
+end
 
 
 # TODO:
