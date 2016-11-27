@@ -1,6 +1,6 @@
 # TODO:
 #
-ip = node[:network][:interfaces][:eth1][:addresses].detect{|k,v| v[:family] == "inet" }.first
+ip = node['network']['interfaces']['enp0s8']['addresses'].detect{|k,v| v['family'] == "inet" }.first
 # kibana_5 = Chef::Config[:file_cache_path] + '/kibana-5.0.1-amd64.deb'
 #
 # remote_file kibana_5 do

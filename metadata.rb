@@ -4,7 +4,7 @@ maintainer_email 'you@example.com'
 license 'all_rights'
 description 'Installs/Configures ossec-elk'
 long_description 'Installs/Configures ossec-elk'
-version '0.1.0'
+version '0.1.1'
 # If you upload to Supermarket you should set this so your cookbook
 # gets a `View Issues` link
 # issues_url 'https://github.com/<insert_org_here>/ossec-elk/issues' if respond_to?(:issues_url)
