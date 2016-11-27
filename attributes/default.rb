@@ -9,4 +9,4 @@ override['java']['oracle']['accept_oracle_download_terms'] = true
 
 
 # override['elasticsearch']['install']['version'] = '5.0.1'
-# override['elasticsearch']['checksums']['5.0.1']['debian'] = 'aedbddacbf5c87806ba22d5a953abbef8f54dc0d'
+override['elasticsearch']['checksums']['5.0.1']['debian'] = 'f50592d282eb437b911058d8a5d0192b4dcfd77c48867556f0f582966bb0535b'

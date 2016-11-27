@@ -1,6 +1,6 @@
 # TODO:
 #
-
+ip = node[:network][:interfaces][:eth1][:addresses].detect{|k,v| v[:family] == "inet" }.first
 # kibana_5 = Chef::Config[:file_cache_path] + '/kibana-5.0.1-amd64.deb'
 #
 # remote_file kibana_5 do
@@ -16,11 +16,14 @@ dpkg_package '/root/kibana-5.0.1-amd64.deb' do
   action :install
 end
 
-cookbook_file '/etc/kibana/kibana.yml' do
-  source 'kibana.yml'
+template '/etc/kibana/kibana.yml' do
+  source 'kibana.yml.erb'
   owner 'root'
   group 'root'
   mode 00664
+  variables({
+            "remote_host" => ip
+           })
   notifies :restart, 'service[kibana]', :delayed
 end
 

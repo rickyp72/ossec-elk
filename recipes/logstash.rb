@@ -1,4 +1,6 @@
 ### logstash config
+## Get IP address on ETH1 for vagrant box
+ip = node[:network][:interfaces][:eth1][:addresses].detect{|k,v| v[:family] == "inet" }.first
 
 execute 'apt-get-update-logstash' do
   command 'apt-get update'
@@ -33,12 +35,14 @@ apt_package 'logstash' do
   ignore_failure true
 end
 
-
-cookbook_file '/etc/logstash/conf.d/01-ossec-singlehost.conf' do
-  source '01-ossec-singlehost.conf'
+template '/etc/logstash/conf.d/01-ossec-singlehost.conf' do
+  source '01-ossec-singlehost.conf.erb'
   owner 'root'
   group 'root'
   mode 00644
+  variables({
+            "remote_host" => ip
+           })
   notifies :restart, "service[logstash]"
 end
 
@@ -65,6 +69,7 @@ end
 execute 'extract_GeoLiteCity_dat' do
   command 'gzip -d /root/GeoLiteCity.dat.gz && mv /root/GeoLiteCity.dat /etc/logstash/'
   action :run
+  creates '/etc/logstash/GeoLiteCity.dat'
 end
 
 #  TODO: fix this failure
