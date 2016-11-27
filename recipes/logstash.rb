@@ -2,6 +2,7 @@
 ## Get IP address on ETH1 for vagrant box
 ip = node['network']['interfaces']['enp0s8']['addresses'].detect{|k,v| v['family'] == "inet" }.first
 
+
 execute 'apt-get-update-logstash' do
   command 'apt-get update'
   action :nothing
